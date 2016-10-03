@@ -12,7 +12,16 @@ namespace WebApiDemo.Controllers
         {
             ViewBag.Title = "Home Page";
 
+            int[] array = new int[3];
+
+            return View();
+        }
+
+        public ActionResult Test()
+        {
             return View();
         }
     }
+
+
 }

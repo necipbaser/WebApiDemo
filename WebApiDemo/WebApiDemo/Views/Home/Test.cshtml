@@ -1,0 +1,69 @@
+﻿
+@{
+    ViewBag.Title = "Test";
+}
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<br /><br />
+<input type="button" id="btnEmployeListGet" value="Get ajax" />
+<br />
+<input type="text" id="txtId" />
+<br />
+<br />
+
+<table>
+    <tr>
+        <td>First Name:</td>
+        <td><input type="text" id="txtFirstName" /></td>
+    </tr>
+    <tr>
+        <td>Last Name:</td>
+        <td><input type="text" id="txtLastName" /></td>
+    </tr>
+    <tr>
+        <td>Gender:</td>
+        <td><input type="text" id="txtGender" /></td>
+    </tr>
+    <tr>
+        <td>Salary:</td>
+        <td><input type="text" id="txtSalary" /></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td><input type="button" id="btnEmployeListPost" value="Post ajax" /></td>
+    </tr>
+</table>
+
+
+<div id="divResult"></div>
+<script>
+    $(document).ready(function () {
+        $("#btnEmployeListPost").click(function () {
+            var firstName = $("#txtFirstName").val();
+            var lastName = $("#txtLastName").val();
+            var gender = $("#txtGender").val();
+            var salary = $("#txtSalary").val();
+
+            if (firstName == "") {
+                alert("Fisrtname must not null!!");
+                return;
+            }
+            else {
+                var employee = { FirstName: firstName, LastName: lastName, Gender: gender, Salary: salary };
+                $.post("/api/employees/", employee, function (data, status) {
+                    alert("Post method successed :)");
+                })
+            }
+
+        });
+
+        $("#btnEmployeListGet").click(function () {
+            var employeeId = $("#txtId").val();
+            $.get("/api/employees/" + employeeId, function (data, status) {
+                alert("Data=" + data.FirstName);
+            });
+
+        });
+    });
+</script>
+
